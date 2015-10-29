@@ -7,6 +7,9 @@ WORKDIR /tmp/nginx-installation
 RUN apt-get update
 RUN apt-get install -y wget curl git tree vim htop strace build-essential libpcre3 libpcre3-dev libssl-dev
 
+# avoid error: the HTTP image filter module requires the GD library.
+RUN apt-get install -y libgd2-xpm-dev
+
 # Download and extract Nginx
 # Get the actual Nginx version number/link from: http://nginx.org/en/download.html
 ENV nginx_version 1.9.5
@@ -54,6 +57,7 @@ RUN ./configure \
     --with-http_stub_status_module \
     --with-http_auth_request_module \
     --with-file-aio \
+    --with-http_image_filter_module \
     --with-http_v2_module \
     --with-cc-opt='-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2' \
     --with-ld-opt='-Wl,-z,relro -Wl,--as-needed' \
