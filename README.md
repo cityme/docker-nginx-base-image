@@ -2,11 +2,11 @@
 
 ### Build docker
 
-`docker build -t particle4dev/cityme-media-nginx:0.5.0-5 ./`
+`docker build -t particle4dev/cityme-media-nginx:0.5.0-rc5 ./`
 
 ### Start
 
-`docker run -d -p 80:80 particle4dev/cityme-media-nginx:0.5.0`
+`docker run -d -p 80:80 particle4dev/cityme-media-nginx:0.5.0-rc5`
 
 ### Access container docker
 
