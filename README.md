@@ -2,7 +2,7 @@
 
 ### Build docker
 
-`docker build -t particle4dev/cityme-media-nginx:0.5.0-rc5 ./`
+`docker build -t particle4dev/cityme-media-nginx:0.5.1 ./`
 
 ### Start
 
