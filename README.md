@@ -2,11 +2,11 @@
 
 ### Build docker
 
-`docker build -t particle4dev/cityme-media-nginx:0.5.1 ./`
+`docker build -t particle4dev/cityme-nginx-api:1.0.0 ./`
 
 ### Start
 
-`docker run -d -p 80:80 particle4dev/cityme-media-nginx:0.5.0-rc5`
+`docker run -d -p 80:80 particle4dev/cityme-nginx-api:1.0.0`
 
 ### Access container docker
 
@@ -14,6 +14,6 @@
 
 ### Link
 
-`docker run -d --name MEDIA1 particle4dev/cityme-media:0.5.0-5`
+`docker run -d --name API cityme-api:1.0.0`
 
-`docker run -d -p 80:80 --name NGINX --link MEDIA1:MEDIA1 particle4dev/cityme-media-nginx:0.5.0-5`
+`docker run -d -p 80:80 --name NGINX --link API:API cityme-nginx-api:1.0.0`
