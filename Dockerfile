@@ -24,7 +24,14 @@ RUN wget http://labs.frickle.com/files/ngx_cache_purge-$nginx_cache_purge_versio
     tar -xzvf ngx_cache_purge-$nginx_cache_purge_version.tar.gz && \
     rm -f ./ngx_cache_purge-$nginx_cache_purge_version.tar.gz
 
-# Change directory to 
+# Download and extract Nginx's headers more nginx module
+# Project is also available on github: https://github.com/openresty/headers-more-nginx-module
+ENV headers_more_nginx_module 0.29rc1
+RUN wget https://github.com/openresty/headers-more-nginx-module/archive/v$headers_more_nginx_module.tar.gz && \
+    tar -xzvf v$headers_more_nginx_module.tar.gz && \
+    rm -f ./v$headers_more_nginx_module.tar.gz
+
+# Change directory to
 WORKDIR /tmp/nginx-installation/nginx-$nginx_version
 
 # Configure using ubuntu's configuration
@@ -63,6 +70,7 @@ RUN ./configure \
     --with-ld-opt='-Wl,-z,relro -Wl,--as-needed' \
     --with-ipv6 \
     --add-module=../ngx_cache_purge-$nginx_cache_purge_version && \
+    --add-module=../headers-more-nginx-module-$headers_more_nginx_module && \
     make && \
     make install
 
