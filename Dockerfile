@@ -81,14 +81,8 @@ RUN adduser --system --no-create-home --disabled-login --disabled-password --gro
 RUN mkdir -p /tmp/nginx/cache && \
     chown nginx:nginx /tmp/nginx/cache
 
-# Add configuration files
-ADD ./config/nginx.conf /etc/nginx/nginx.conf
-
 # install supervisor
 RUN apt-get install -y supervisor
-
-# Add configuration files
-ADD ./config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 
