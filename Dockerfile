@@ -1,11 +1,11 @@
-FROM ubuntu
+FROM ubuntu:14.04
 MAINTAINER cityme <particle4dev@gmail.com>
 
 WORKDIR /tmp/nginx-installation
 
 # Update repositories lists and install required tools and libraries
-RUN apt-get update
-RUN apt-get install -y wget curl git tree vim htop strace build-essential libpcre3 libpcre3-dev libssl-dev
+RUN apt-get update; apt-get upgrade -y; apt-get clean
+RUN apt-get install -y wget curl git tree vim htop strace build-essential libpcre3 libpcre3-dev libstdc++6-4.7-dev libssl-dev
 
 # avoid error: the HTTP image filter module requires the GD library.
 RUN apt-get install -y libgd2-xpm-dev
@@ -26,7 +26,7 @@ RUN wget http://labs.frickle.com/files/ngx_cache_purge-$nginx_cache_purge_versio
 
 # Download and extract Nginx's headers more nginx module
 # Project is also available on github: https://github.com/openresty/headers-more-nginx-module
-ENV headers_more_nginx_module 0.29rc1
+ENV headers_more_nginx_module 0.30
 RUN wget https://github.com/openresty/headers-more-nginx-module/archive/v$headers_more_nginx_module.tar.gz && \
     tar -xzvf v$headers_more_nginx_module.tar.gz && \
     rm -f ./v$headers_more_nginx_module.tar.gz

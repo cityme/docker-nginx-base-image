@@ -1,5 +1,5 @@
 NGINX:
-  image: particle4dev/cityme-nginx-api:1.0.1
+  image: particle4dev/cityme-nginx-api:1.1.0
   ports:
    - "80:80"
   volumes:
