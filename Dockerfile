@@ -63,6 +63,7 @@ RUN ./configure \
     --with-http_secure_link_module \
     --with-http_stub_status_module \
     --with-http_auth_request_module \
+    --with-http_auth_basic_module \
     --with-file-aio \
     --with-http_image_filter_module \
     --with-http_v2_module \
