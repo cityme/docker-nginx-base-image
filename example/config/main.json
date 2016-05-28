@@ -1,0 +1,7 @@
+{
+  "consul": "52.221.236.162:8500",
+  "template": {
+    "source": "/workspaces/consul-template/templates/nginx.ctmpl",
+    "destination": "/workspaces/consul-template/templates/nginx.conf"
+  }
+}

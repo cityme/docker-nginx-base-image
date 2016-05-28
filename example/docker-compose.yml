@@ -1,0 +1,8 @@
+version: '2'
+services:
+  NGINX:
+    image: particle4dev/cityme-nginx-image:1.2.3
+    volumes:
+      - ./templates/:/workspaces/consul-template/templates:rw
+      - ./config/:/workspaces/consul-template/config:rw
+    container_name: NGINX
