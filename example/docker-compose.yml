@@ -1,7 +1,7 @@
 version: '2'
 services:
   CONSUL_NGINX:
-    image: particle4dev/cityme-nginx-image:1.2.5
+    image: particle4dev/cityme-nginx-image:1.2.6
     volumes:
       - ./templates/:/workspaces/consul-template/templates:rw
       - ./config/:/workspaces/consul-template/config:rw
