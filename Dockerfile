@@ -75,15 +75,11 @@ RUN ./configure \
     make && \
     make install
 
-RUN adduser --system --no-create-home --disabled-login --disabled-password --group nginx && \
-    mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/proxy_temp /var/cache/nginx/fastcgi_temp /var/cache/nginx/uwsgi_temp /var/cache/nginx/scgi_temp
-
-# Setup nginx caching requirements
-RUN mkdir -p /tmp/nginx/cache && \
-    chown nginx:nginx /tmp/nginx/cache
-
 # install supervisor
 RUN apt-get install -y supervisor
+
+# Add configuration files
+ADD ./config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # install consul-template
 # https://help.ubuntu.com/community/HowToSHA256SUM
@@ -99,7 +95,15 @@ RUN cd /tmp && \
 
 RUN mkdir -p /workspaces/consul-template/templates
 RUN mkdir -p /workspaces/consul-template/config
-RUN touch /workspaces/consul-template/config/e
+ADD ./restart-nginx.sh /workspaces/consul-template/
+RUN chmod u+x /workspaces/consul-template/restart-nginx.sh
+
+RUN adduser --system --no-create-home --disabled-login --disabled-password --group nginx && \
+    mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/proxy_temp /var/cache/nginx/fastcgi_temp /var/cache/nginx/uwsgi_temp /var/cache/nginx/scgi_temp
+
+# Setup nginx caching requirements
+RUN mkdir -p /tmp/nginx/cache && \
+    chown nginx:nginx /tmp/nginx/cache
 
 WORKDIR /workspaces/
 

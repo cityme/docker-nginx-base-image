@@ -1,8 +1,10 @@
 version: '2'
 services:
-  NGINX:
-    image: particle4dev/cityme-nginx-image:1.2.3
+  CONSUL_NGINX:
+    image: particle4dev/cityme-nginx-image:1.2.5
     volumes:
       - ./templates/:/workspaces/consul-template/templates:rw
       - ./config/:/workspaces/consul-template/config:rw
-    container_name: NGINX
+    container_name: CONSUL_NGINX
+    ports:
+      - "2323:80"

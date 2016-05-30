@@ -55,7 +55,7 @@ http {
   # Sets the path and other parameters of a cache. Cache data are stored in files. The file name in a cache is a result of applying the MD5 function to the cache key
 
   upstream frontend { {{range service "http"}}
-    server {{.Address}};{{end}}
+    server {{.Address}}:{{.Port}};{{end}}
   }
 
   server {
@@ -67,7 +67,7 @@ http {
     client_max_body_size 20M;
 
     listen     80; # Sets the address and port for IP,
-    server_name  api.cityme.vn; # Sets names of a virtual server
+    server_name  tests.cityme.vn; # Sets names of a virtual server
 
     #charset koi8-r;
     #access_log  /var/log/nginx/log/host.access.log  main;
@@ -78,7 +78,9 @@ http {
 
     location / {
       add_header Content-Type text/plain;
-      return 200 'hello word';
+      return 200 "{{range service "http"}}
+       {{.Address}}:{{.Port}};{{end}}
+      ";
     }
   }
 }
