@@ -79,7 +79,9 @@ RUN ./configure \
 RUN apt-get install -y supervisor
 
 # Add configuration files
-ADD ./config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD ./supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD ./supervisord/nginx.sv.conf /etc/supervisor/conf.d/nginx.sv.conf
+ADD ./supervisord/consul-template.sv.conf /etc/supervisor/conf.d/consul-template.sv.conf
 
 # install consul-template
 # https://help.ubuntu.com/community/HowToSHA256SUM
